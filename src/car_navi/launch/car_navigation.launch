@@ -1,0 +1,15 @@
+<!-- 在empty_world下，利用已有map，amcl定位，在Rviz环境下进行全局/局部导航navigation -->
+<!-- 运行此launch前，请确保map文件夹下已有相关文件 -->
+<launch>
+
+    <include file = "$( find car_navi )/launch/car_slam_mapget.launch" />
+
+    <include file = "$( find car_navi )/launch/car_spawn.launch" />
+
+    <include file="$(find car_navi)/launch/car_amcl.launch" />
+
+    <include file="$(find car_navi)/launch/car_path.launch" />
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find car_navi)/config/car_navigation.rviz"  /> 
+
+</launch>

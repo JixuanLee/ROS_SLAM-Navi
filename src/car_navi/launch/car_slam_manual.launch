@@ -1,0 +1,9 @@
+<!-- pls print in:  "export SVGA_VGPU10=0"  before U launch this file.  -->
+
+<launch>
+
+    <include file = "$( find car_navi )/launch/car_slam.launch" />
+
+    <node pkg="rviz" type="rviz" name="rviz"     args="-d $(find car_navi)/config/car_slam_manual.rviz"  />
+
+</launch>

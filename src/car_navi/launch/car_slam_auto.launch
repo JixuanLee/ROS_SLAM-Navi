@@ -1,0 +1,11 @@
+<!-- 实现自动导航下的SLAM建图 -->
+<!-- 此时不使用amcl定位，而是使用gmapping自带定位 -->
+<launch>
+
+    <include file = "$( find car_navi )/launch/car_slam.launch" />
+
+    <include file="$(find car_navi)/launch/car_path.launch" />
+
+    <node pkg="rviz" type="rviz" name="rviz"     args="-d $(find car_navi)/config/car_slam_auto.rviz"  />
+
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+
+    <arg name="filename" value="$(find car_navi)/map/car_slam_save" />
+
+    <node name="map_save" pkg="map_server" type="map_saver" args="-f $(arg filename)" />
+    
+</launch>
+
+<!-- PS: The system will save the current map when u run the launch.
+Btw, when U next run the launch, there will be a new map 
+which is created and replace the old one.  -->

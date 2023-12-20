@@ -1,0 +1,15 @@
+<!-- 生成小车模型的基础配置文件,将在rviz和gazebo中显示 -->
+<launch>
+
+        <param name="robot_description" command="$(find xacro)/xacro $(find car_gazebo)/urdf/ljx_car_with_sensor.xacro" />
+
+        <include  file = "$(find gazebo_ros)/launch/empty_world.launch"  >
+                <arg name = "world_name"  value = "$(find car_gazebo)/world/exam_world_20231113.world" />
+        </include>
+
+        <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model ljx_car -param robot_description -x 13.0 -y 10.0 "  />
+        
+        <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" />
+
+</launch>

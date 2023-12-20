@@ -1,0 +1,73 @@
+<robot name="my_car_move" xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!--  -->
+    <xacro:macro name="joint_trans" params="joint_name">
+        <!-- Transmission is important to link the joints and the controller -->
+        <transmission name="${joint_name}_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${joint_name}">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${joint_name}_motor">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+
+    <!--  -->
+    <xacro:joint_trans joint_name="wheel1_base" />
+    <xacro:joint_trans joint_name="wheel2_base" />
+    <xacro:joint_trans joint_name="wheel3_base" />
+    <xacro:joint_trans joint_name="wheel4_base" />
+
+    <!--  -->
+    <gazebo>
+        <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+            <updateRate>10.0</updateRate>
+            <robotNamespace>/</robotNamespace>
+            <leftFrontJoint>wheel3_base</leftFrontJoint>
+            <rightFrontJoint>wheel4_base</rightFrontJoint>
+            <leftRearJoint>wheel2_base</leftRearJoint>
+            <rightRearJoint>wheel1_base</rightRearJoint>
+            <wheelSeparation>0.268</wheelSeparation>
+            <wheelDiameter>0.1016</wheelDiameter>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+            <torque>20</torque>
+            <topicName>cmd_vel</topicName>
+            <broadcastTF>true</broadcastTF>
+            <publishOdom>true</publishOdom>
+            <odometryFrame>odom</odometryFrame> 
+            <odometryTopic>odom</odometryTopic>
+        </plugin>
+    </gazebo>
+    <gazebo reference="wheel1_link">
+        <material>Gazebo/Black</material>
+        <mu1>10000000</mu1>
+        <mu2>10000000</mu2>
+        <kp>10000000</kp>
+        <kd>1</kd>
+    </gazebo>
+    <gazebo reference="wheel2_link">
+        <material>Gazebo/Black</material>
+        <mu1>10000000</mu1>
+        <mu2>10000000</mu2>
+        <kp>10000000</kp>
+        <kd>1</kd>
+    </gazebo>
+    <gazebo reference="wheel3_link">
+        <material>Gazebo/Black</material>
+        <mu1>10000000</mu1>
+        <mu2>10000000</mu2>
+        <kp>10000000</kp>
+        <kd>1</kd>
+    </gazebo>
+    <gazebo reference="wheel4_link">
+        <material>Gazebo/Black</material>
+        <mu1>10000000</mu1>
+        <mu2>10000000</mu2>
+        <kp>10000000</kp>
+        <kd>1</kd>
+    </gazebo>
+
+</robot>

@@ -1,0 +1,17 @@
+<!-- 此launch不可单独启动，而是配置在test里的一个子launch。 -->
+<!-- 此launch启动 move_base 节点，实现自动导航 -->
+<launch>
+
+    <param name="/use_sime_time" value="true"/>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+
+        <rosparam file="$(find car_navi)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find car_navi)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find car_navi)/param/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find car_navi)/param/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find car_navi)/param/base_local_planner_params.yaml" command="load" />
+        
+    </node>
+
+</launch>
